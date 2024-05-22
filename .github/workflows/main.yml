@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  run_pull:
+    name: run pull
+    runs-on: ubuntu-latest
+    steps:
+    - name: install ssh keys
+      run: |
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.HOST }} > ~/.ssh/known_hosts
+    - name: connect and pull
+      run: ssh ${{ secrets.USER }}@${{ secrets.HOST }} "cd ${{ secrets.MHWPAINT_APP_DIR }} && git pull && exit"
+    - name: cleanup
+      run: rm -rf ~/.ssh
