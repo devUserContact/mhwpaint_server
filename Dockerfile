@@ -1,6 +1,6 @@
 FROM node:current-alpine3.18
 WORKDIR /usr/src/app
-COPY package*.json app.js ./
+COPY package*.json src/* ./
 RUN npm install
 EXPOSE 3000
-CMD ["node", "app.js"]
+CMD ["node", "src/app.js"]
