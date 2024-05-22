@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:current-alpine3.18
 WORKDIR /usr/src/app
 COPY package*.json app.js ./
 RUN npm install
