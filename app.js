@@ -1,5 +1,5 @@
 const express = require('express')
 const app = express()
 
-app.get('/', (req, res) => res.send('this is an another action test'))
+app.get('/', (req, res) => res.send('final test!'))
 app.listen(3000, () => console.log('Server ready'))
