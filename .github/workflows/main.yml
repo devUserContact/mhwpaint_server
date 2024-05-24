@@ -13,6 +13,6 @@ jobs:
         echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.HOST }} > ~/.ssh/known_hosts
     - name: connect and pull
-      run: ssh ${{ secrets.USER }}@${{ secrets.HOST }} "cd ${{ secrets.MHWPAINT_APP_DIR }} && pkill node && git pull && nohup node src/app.js & && exit"
+      run: ssh ${{ secrets.USER }}@${{ secrets.HOST }} "cd ${{ secrets.MHWPAINT_APP_DIR }} && pkill node && git pull && nohup node src/app.js >/dev/null 2>&1 && exit"
     - name: cleanup
       run: rm -rf ~/.ssh
