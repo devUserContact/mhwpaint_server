@@ -7,13 +7,15 @@ exports.connectToServer = async function () {
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
       password: process.env.DB_PSSWRD,
+      socketPath: process.env.DB_SOCK,
     });
-    console.log("connected ! connection id is" + conn.threadId);
+
+    console.log("connected ! connection id is " + conn.threadId);
     await conn.query("USE mhwpaint;");
     const query = await conn.query("SELECT * FROM works;");
     return query;
   } catch (err) {
-    console.log("not connected due to error: " + err);
+    console.debug("not connected due to error: " + err);
   }
 };
 
@@ -30,5 +32,3 @@ exports.connectToServer = async function () {
 //    conn.end();
 //  }
 //};
-
-

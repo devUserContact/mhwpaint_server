@@ -1,13 +1,19 @@
-var db = require("./db.js");
 var express = require("express");
+var cors = require("cors");
+var db = require("./db.js");
 
 const app = express();
 
-app.get("/", (req, res) => res.send("test"));
+var corsOptions = {
+  origin: "https://mhwpaint.com",
+  optionsSuccessStatus: 200,
+};
 
-app.get("/mhwpaint/gallery", async function (req, res) {
-  let test = await db.connectToServer();
-  res.send(test);
+app.get("/", cors(corsOptions), (req, res) => res.send("test"));
+
+app.get("/mhwpaint/gallery", cors(corsOptions), async function (req, res) {
+  let gallery = await db.connectToServer();
+  res.send(gallery);
 });
 
 app.listen(3000, () => console.log("Server ready"));
