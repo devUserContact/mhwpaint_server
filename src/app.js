@@ -5,7 +5,7 @@ var db = require("./db.js");
 const app = express();
 
 var corsOptions = {
-  origin: "https://mhwpaint.com",
+  origin: "http://localhost:3001",
   optionsSuccessStatus: 200,
 };
 
