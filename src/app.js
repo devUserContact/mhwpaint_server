@@ -18,29 +18,25 @@ var corsOptions = {
   optionsSuccessStatus: 200,
 }
 
-app.get('/', cors(corsOptions), (req, res) => res.send('test'))
+app.get('/api', cors(corsOptions), (req, res) => res.send('test'))
 
-app.get('/mhwpaint/gallery', cors(corsOptions), async function (req, res) {
+app.get('/api/gallery', cors(corsOptions), async function (req, res) {
   let gallery = await db.query_gallery()
   res.send(gallery)
 })
 
-app.get('/mhwpaint/gallery/:id', cors(corsOptions), async function (req, res) {
+app.get('/api/gallery/:id', cors(corsOptions), async function (req, res) {
   let work = await db.query_work(req.params.id)
   res.send(work)
 })
 
-app.get(
-  '/mhwpaint/cart/:cart_items',
-  cors(corsOptions),
-  async function (req, res) {
-    let cart_items = await db.query_cart(req.params.cart_items)
-    res.send(cart_items)
-  },
-)
+app.get('/api/cart/:cart_items', cors(corsOptions), async function (req, res) {
+  let cart_items = await db.query_cart(req.params.cart_items)
+  res.send(cart_items)
+})
 
 // paypal
-app.put('/mhwpaint/orders', cors(corsOptions), async function (req, res) {
+app.put('/api/orders', cors(corsOptions), async function (req, res) {
   try {
     // use the cart information passed from the front-end to calculate the order amount detals
     const { cart } = req.body
@@ -54,7 +50,7 @@ app.put('/mhwpaint/orders', cors(corsOptions), async function (req, res) {
 })
 
 app.put(
-  '/mhwpaint/orders/:orderID/capture',
+  '/api/orders/:orderID/capture',
   cors(corsOptions),
   async function (req, res) {
     try {
@@ -67,8 +63,6 @@ app.put(
     }
   },
 )
-
-app.listen(3000, () => console.log('Server ready'))
 
 const base = 'https://api-m.sandbox.paypal.com'
 /**
@@ -176,3 +170,5 @@ async function handleResponse(response) {
     throw new Error(errorMessage)
   }
 }
+
+app.listen(3000, () => console.log('Server ready'))
