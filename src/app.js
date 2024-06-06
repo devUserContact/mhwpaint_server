@@ -40,8 +40,8 @@ app.post('/api/orders', cors(corsOptions), async function (req, res) {
   try {
     // use the cart information passed from the front-end to calculate the order amount detals
     const { cart } = req.body
-	cart[0].total = await db.calcCartValue(cart[0].id)
-	  console.log(cart)
+    cart[0].total = await db.calcCartValue(cart[0].id)
+    console.log(cart)
     const { jsonResponse, httpStatusCode } = await createOrder(cart)
     res.status(httpStatusCode).json(jsonResponse)
   } catch (error) {
@@ -103,7 +103,7 @@ const createOrder = async (cart) => {
     'shopping cart information passed from the frontend createOrder() callback:',
     cart,
   )
-	
+
   const accessToken = await generateAccessToken()
   const url = `${base}/v2/checkout/orders`
   const payload = {

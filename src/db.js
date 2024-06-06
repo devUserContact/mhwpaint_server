@@ -74,7 +74,7 @@ exports.calcCartValue = async function (cartId) {
   let conn, query, total
   let prices = []
   const initialValue = 0
-	
+
   let cart_items = "'" + cartId.split('-').join("', '") + "'"
   try {
     conn = await mariadb.createConnection({
@@ -89,9 +89,9 @@ exports.calcCartValue = async function (cartId) {
     query = await conn.query(
       `SELECT price FROM works WHERE unique_id IN (${cart_items}) ;`,
     )
-	  query.forEach((object) => prices.push(object.price))
-	  total = prices.reduce((a, b) => a + b, initialValue)
-	  total = total + 10
+    query.forEach((object) => prices.push(object.price))
+    total = prices.reduce((a, b) => a + b, initialValue)
+    total = total + 10
   } catch (err) {
     console.debug('not connected due to error: ' + err)
   } finally {
@@ -99,5 +99,3 @@ exports.calcCartValue = async function (cartId) {
     return total
   }
 }
-
-
