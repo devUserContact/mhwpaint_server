@@ -36,11 +36,12 @@ app.get('/api/cart/:cart_items', cors(corsOptions), async function (req, res) {
 })
 
 // paypal
-app.put('/api/orders', cors(corsOptions), async function (req, res) {
+app.post('/api/orders', cors(corsOptions), async function (req, res) {
   try {
     // use the cart information passed from the front-end to calculate the order amount detals
     const { cart } = req.body
-    console.log(cart)
+	cart[0].total = await db.calcCartValue(cart[0].id)
+	  console.log(cart)
     const { jsonResponse, httpStatusCode } = await createOrder(cart)
     res.status(httpStatusCode).json(jsonResponse)
   } catch (error) {
@@ -49,7 +50,7 @@ app.put('/api/orders', cors(corsOptions), async function (req, res) {
   }
 })
 
-app.put(
+app.post(
   '/api/orders/:orderID/capture',
   cors(corsOptions),
   async function (req, res) {
@@ -102,7 +103,7 @@ const createOrder = async (cart) => {
     'shopping cart information passed from the frontend createOrder() callback:',
     cart,
   )
-
+	
   const accessToken = await generateAccessToken()
   const url = `${base}/v2/checkout/orders`
   const payload = {
@@ -111,7 +112,7 @@ const createOrder = async (cart) => {
       {
         amount: {
           currency_code: 'USD',
-          value: '100.00',
+          value: cart[0].total,
         },
       },
     ],
