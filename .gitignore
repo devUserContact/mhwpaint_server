@@ -3,3 +3,4 @@ node_modules
 refresh.sh
 _notes
 Dockerfile
+nohup.out

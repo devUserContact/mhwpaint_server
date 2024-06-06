@@ -35,11 +35,15 @@ app.get('/api/cart/:cart_items', cors(corsOptions), async function (req, res) {
   res.send(cart_items)
 })
 
-app.post('/api/set-items-to-sold', cors(corsOptions), async function (req, res) {
+app.post(
+  '/api/set-items-to-sold',
+  cors(corsOptions),
+  async function (req, res) {
     const { cart } = req.body
     await db.setItemsToSold(cart[0].id)
-	res.send(200)
-})
+    res.send(200)
+  },
+)
 
 // paypal
 app.post('/api/orders', cors(corsOptions), async function (req, res) {

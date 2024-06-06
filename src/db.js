@@ -121,6 +121,6 @@ exports.setItemsToSold = async function (cartId) {
     console.debug('not connected due to error: ' + err)
   } finally {
     conn.close()
-	  return
+    return
   }
 }
