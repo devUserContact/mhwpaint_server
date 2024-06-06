@@ -35,13 +35,18 @@ app.get('/api/cart/:cart_items', cors(corsOptions), async function (req, res) {
   res.send(cart_items)
 })
 
+app.post('/api/set-items-to-sold', cors(corsOptions), async function (req, res) {
+    const { cart } = req.body
+    await db.setItemsToSold(cart[0].id)
+	res.send(200)
+})
+
 // paypal
 app.post('/api/orders', cors(corsOptions), async function (req, res) {
   try {
     // use the cart information passed from the front-end to calculate the order amount detals
     const { cart } = req.body
     cart[0].total = await db.calcCartValue(cart[0].id)
-    console.log(cart)
     const { jsonResponse, httpStatusCode } = await createOrder(cart)
     res.status(httpStatusCode).json(jsonResponse)
   } catch (error) {
@@ -70,7 +75,7 @@ const base = 'https://api-m.sandbox.paypal.com'
  * Generate an OAuth 2.0 access token for authenticating with PayPal REST APIs.
  * @see https://developer.paypal.com/api/rest/authentication/
  */
-const generateAccessToken = async () => {
+const generateAccessToken = async function () {
   try {
     if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
       throw new Error('MISSING_API_CREDENTIALS')
@@ -97,7 +102,7 @@ const generateAccessToken = async () => {
  * Create an order to start the transaction.
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_create
  */
-const createOrder = async (cart) => {
+const createOrder = async function (cart) {
   // use the cart information passed from the front-end to calculate the purchase unit details
   console.log(
     'shopping cart information passed from the frontend createOrder() callback:',
@@ -139,7 +144,7 @@ const createOrder = async (cart) => {
  * Capture payment for the created order to complete the transaction.
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_capture
  */
-const captureOrder = async (orderID) => {
+const captureOrder = async function (orderID) {
   const accessToken = await generateAccessToken()
   const url = `${base}/v2/checkout/orders/${orderID}/capture`
 

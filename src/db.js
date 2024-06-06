@@ -99,3 +99,28 @@ exports.calcCartValue = async function (cartId) {
     return total
   }
 }
+
+exports.setItemsToSold = async function (cartId) {
+  let conn, query
+
+  let cart_items = "'" + cartId.split('-').join("', '") + "'"
+  try {
+    conn = await mariadb.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PSSWRD,
+      socketPath: process.env.DB_SOCK,
+    })
+
+    console.log('connected ! connection id is ' + conn.threadId)
+    await conn.query('USE mhwpaint;')
+    query = await conn.query(
+      `UPDATE works SET sold = 1 WHERE unique_id IN (${cart_items}) ;`,
+    )
+  } catch (err) {
+    console.debug('not connected due to error: ' + err)
+  } finally {
+    conn.close()
+	  return
+  }
+}

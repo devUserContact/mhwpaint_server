@@ -1,0 +1,87 @@
+(node:23298) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1897:16)
+    at listenInCluster (node:net:1945:12)
+    at Server.listen (node:net:2037:7)
+    at Function.listen (/root/apps/mhw-paint/backend/mhwpaint_server/node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (/root/apps/mhw-paint/backend/mhwpaint_server/src/app.js:174:5)
+    at Module._compile (node:internal/modules/cjs/loader:1368:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1426:10)
+    at Module.load (node:internal/modules/cjs/loader:1205:32)
+    at Module._load (node:internal/modules/cjs/loader:1021:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:142:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1924:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v21.7.2
+(node:23350) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Server ready
+not connected due to error: Error: getaddrinfo ENOTFOUND /run/mysqld/mysqld.sock
+/root/apps/mhw-paint/backend/mhwpaint_server/src/db.js:20
+    conn.close()
+         ^
+
+TypeError: Cannot read properties of undefined (reading 'close')
+    at exports.query_gallery (/root/apps/mhw-paint/backend/mhwpaint_server/src/db.js:20:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /root/apps/mhw-paint/backend/mhwpaint_server/src/app.js:24:17
+
+Node.js v21.7.2
+(node:23387) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Server ready
+(node:23440) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Server ready
+connected ! connection id is 473
+connected ! connection id is 474
+connected ! connection id is 475
+(node:25588) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Server ready
+connected ! connection id is 476
+connected ! connection id is 477
+connected ! connection id is 478
+connected ! connection id is 479
+connected ! connection id is 480
+'rn8h1a3rfu'
+connected ! connection id is 481
+connected ! connection id is 482
+'rn8h1a3rfu'
+connected ! connection id is 483
+connected ! connection id is 484
+'rn8h1a3rfu'
+connected ! connection id is 485
+(node:25897) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Server ready
+connected ! connection id is 486
+connected ! connection id is 487
+connected ! connection id is 488
+connected ! connection id is 489
+'ac66n8gfg4'
+connected ! connection id is 490
+(node:25955) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Server ready
+undefined
+shopping cart information passed from the frontend createOrder() callback: undefined
+connected ! connection id is 491
+connected ! connection id is 492
+'ac66n8gfg4'
+connected ! connection id is 493
+[ { id: 1, quantity: 1 } ]
+shopping cart information passed from the frontend createOrder() callback: [ { id: 1, quantity: 1 } ]
