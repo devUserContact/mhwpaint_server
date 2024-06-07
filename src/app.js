@@ -74,7 +74,7 @@ app.post(
   },
 )
 
-const base = 'https://api-m.sandbox.paypal.com'
+const base = 'https://api-m.paypal.com'
 /**
  * Generate an OAuth 2.0 access token for authenticating with PayPal REST APIs.
  * @see https://developer.paypal.com/api/rest/authentication/
