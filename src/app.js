@@ -45,6 +45,16 @@ app.post(
   },
 )
 
+app.post(
+  '/api/input-order-ticket',
+  cors(corsOptions),
+  async function (req, res) {
+    const { sale } = req.body
+    console.log(sale.id)
+    await db.inputOrderTicket(sale.id)
+    res.send(200)
+  },
+)
 // paypal
 app.post('/api/orders', cors(corsOptions), async function (req, res) {
   try {
@@ -74,7 +84,7 @@ app.post(
   },
 )
 
-const base = 'https://api-m.paypal.com'
+const base = process.env.PAYPAL_BASE_URL
 /**
  * Generate an OAuth 2.0 access token for authenticating with PayPal REST APIs.
  * @see https://developer.paypal.com/api/rest/authentication/
