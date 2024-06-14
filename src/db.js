@@ -154,3 +154,25 @@ exports.inputOrderTicket = async function (cartId) {
     return
   }
 }
+
+exports.query_posts = async function () {
+  let conn, query
+  try {
+    conn = await mariadb.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PSSWRD,
+      socketPath: process.env.DB_SOCK,
+    })
+
+    console.log('connected ! connection id is ' + conn.threadId)
+    await conn.query('USE devusercontact_blog;')
+    query = await conn.query('SELECT * FROM posts;')
+  } catch (err) {
+    console.debug('not connected due to error: ' + err)
+  } finally {
+    conn.close()
+    return query
+  }
+}
+

@@ -191,4 +191,11 @@ async function handleResponse(response) {
   }
 }
 
+// devUserContact
+
+app.get('/api/blog/devusercontact/posts', cors(corsOptions), async function (req, res) {
+  let gallery = await db.query_posts()
+  res.send(gallery)
+})
+
 app.listen(3000, () => console.log('Server ready'))
